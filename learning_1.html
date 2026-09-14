@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿里云 ACA 云计算认证 · AI 驱动的技术自学方法 | 李思颖</title>
+<style>
+
+:root{
+  color-scheme:light;
+  --bg:#f7f9f9;
+  --card:#ffffff;
+  --card-2:#f2f6f6;
+  --ink:#13252a;
+  --ink-2:#4a5f65;
+  --ink-3:#7b8e93;
+  --line:#dce5e6;
+  --line-2:#e9efef;
+  --accent:#1f4e5c;
+  --accent-soft:#e6eff1;
+  --accent-mid:#a9c6cd;
+  --brass:#a8763e;
+  --brass-soft:#f6eee1;
+  --green:#2f6b54;
+  --green-soft:#e7f2ed;
+  --red:#9b4a38;
+  --red-soft:#f8ebe7;
+  --fig:#c3d2d5;
+  --fig-line:#8fa6ab;
+  --radius:16px;
+  --nav-h:54px;
+  --shadow:0 6px 24px rgba(19,37,42,.07);
+  --sans:"PingFang SC","Microsoft YaHei","Source Han Sans SC","Noto Sans CJK SC","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15.5px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+section.band{padding-block:56px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--nav-h) + 14px);}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+section.band:first-of-type{border-top:none;}
+.mt{margin-top:24px}
+.mt-lg{margin-top:38px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+
+/* ---------- sticky nav ---------- */
+.topnav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(247,249,249,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.topnav .bar{
+  max-width:1080px;margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;gap:7px;height:var(--nav-h);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.topnav .bar::-webkit-scrollbar{display:none}
+.navbrand{
+  flex:none;font-weight:800;font-size:14px;color:var(--ink);
+  padding-right:13px;margin-right:5px;border-right:1px solid var(--line);white-space:nowrap;
+}
+.navlink{
+  flex:none;font-size:13.5px;color:var(--ink-2);text-decoration:none;
+  padding:7px 13px;border-radius:999px;border:1px solid transparent;
+  white-space:nowrap;transition:background .15s,color .15s;
+}
+.navlink:hover{background:var(--accent-soft);color:var(--accent)}
+.navlink.active{background:var(--accent);color:#fff;font-weight:700}
+.navlink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readbar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--brass);transition:width .08s linear}
+@media (max-width:640px){.navbrand{font-size:13px;padding-right:9px;margin-right:3px}.topnav .bar{gap:6px}.navlink{font-size:13px;padding:6px 11px}}
+
+/* ---------- hero CTA ---------- */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cta{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:15px;font-weight:700;padding:13px 22px;border-radius:10px;
+  background:var(--accent);color:#fff;border:1px solid var(--accent);box-shadow:var(--shadow);
+  transition:transform .08s;
+}
+.cta.alt{background:var(--card);color:var(--accent)}
+.cta:active{transform:translateY(1px)}
+.cta:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* ---------- type ---------- */
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12.5px;font-weight:700;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:16px;
+  font-family:var(--mono);
+}
+.kicker::before{content:"";width:30px;height:2px;background:var(--accent);border-radius:2px}
+.section-title{
+  font-size:12.5px;font-weight:700;color:#fff;background:var(--ink);
+  display:inline-block;padding:7px 16px;border-radius:999px;letter-spacing:.16em;
+  margin-bottom:18px;font-family:var(--mono);
+}
+h1{font-size:clamp(30px,5.4vw,50px);line-height:1.2;font-weight:800;letter-spacing:.01em;text-wrap:balance}
+h2{font-size:clamp(23px,3.6vw,33px);line-height:1.3;font-weight:800;margin-bottom:6px;text-wrap:balance}
+h3{font-size:18px;font-weight:700}
+.subhead{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;color:var(--brass);font-weight:600;margin-bottom:10px;text-transform:uppercase}
+.sub{font-size:17px;color:var(--ink-2);line-height:1.8;margin-top:12px;max-width:68ch}
+.lead{font-size:17.5px;color:var(--ink-2);line-height:1.85;max-width:70ch}
+.lead b,.sub b{color:var(--ink);font-weight:700}
+b,strong{color:var(--ink);font-weight:700}
+.hl{color:var(--accent);font-weight:700}
+.hl-a{color:var(--brass);font-weight:700}
+.num{font-family:var(--mono);color:var(--brass);font-weight:600}
+p+p{margin-top:14px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding-block:64px 48px;overflow:hidden}
+.hero .deco{
+  position:absolute;right:-60px;top:40px;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#e3eef0,#f3f8f8 62%,transparent 74%);
+  border:1px dashed var(--accent-mid);opacity:.85;pointer-events:none;z-index:0;
+}
+.hero>.wrap{position:relative;z-index:1}
+.tagrow{margin-bottom:20px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  display:inline-block;font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);letter-spacing:.04em;
+}
+.tag.amber{background:var(--brass-soft);color:var(--brass)}
+.tag.green{background:var(--green-soft);color:var(--green)}
+.tag.red{background:var(--red-soft);color:var(--red)}
+.idrow{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
+.chip{
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:9px 18px;font-size:14px;color:var(--ink-2);box-shadow:var(--shadow);
+}
+.chip b{color:var(--ink)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+@media (max-width:820px){.stat-row{grid-template-columns:1fr 1fr}.hero .deco{display:none}}
+.stat{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 18px;box-shadow:var(--shadow);text-align:center;
+}
+.stat .v{font-size:clamp(24px,4vw,31px);font-weight:800;color:var(--accent);font-family:var(--mono);letter-spacing:-.01em}
+.stat .k{font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.55}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 26px;box-shadow:var(--shadow);
+}
+.card h3{font-size:17.5px;margin-bottom:9px;display:flex;align-items:center;gap:10px}
+.card p,.card li{font-size:15px;color:var(--ink-2);line-height:1.78}
+.card ul{list-style:none}
+.card li{padding-left:19px;position:relative;margin-top:7px}
+.card li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--accent-mid)}
+.badge{
+  width:29px;height:29px;border-radius:9px;background:var(--accent-soft);color:var(--accent);
+  display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex:none;
+  font-family:var(--mono);
+}
+
+/* ---------- quote / ToB callout ---------- */
+.quote{
+  border-left:4px solid var(--accent);background:var(--accent-soft);
+  padding:18px 24px;border-radius:0 var(--radius) var(--radius) 0;
+  font-size:16px;line-height:1.8;color:var(--ink);margin-top:24px;
+}
+.quote.amber{border-color:var(--brass);background:var(--brass-soft)}
+.quote.red{border-color:var(--red);background:var(--red-soft)}
+.quote .q-label{
+  font-size:11.5px;font-weight:800;color:var(--accent);letter-spacing:.14em;
+  display:block;margin-bottom:6px;font-family:var(--mono);
+}
+.quote.amber .q-label{color:var(--brass)}
+.quote.red .q-label{color:var(--red)}
+
+/* ---------- VS boxes ---------- */
+.vs{display:grid;grid-template-columns:1fr 52px 1fr;gap:0;align-items:stretch;margin-top:24px}
+@media (max-width:820px){.vs{grid-template-columns:1fr;gap:14px}}
+.vs-mid{display:flex;align-items:center;justify-content:center}
+.vs-badge{
+  width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;font-family:var(--mono);
+}
+.bad-box{background:var(--red-soft);border:1px solid #eed6cf;border-radius:var(--radius);padding:22px 24px}
+.good-box{background:var(--green-soft);border:1px solid #cde3d8;border-radius:var(--radius);padding:22px 24px}
+.bad-box h3{color:var(--red);font-size:16.5px;margin-bottom:9px}
+.good-box h3{color:var(--green);font-size:16.5px;margin-bottom:9px}
+.bad-box p,.good-box p{font-size:14.8px;color:var(--ink-2);line-height:1.78}
+
+/* ---------- flow ---------- */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:26px;flex-wrap:wrap}
+.flow .step{
+  flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 16px;text-align:center;box-shadow:var(--shadow);
+}
+.flow .step .s-title{font-size:15.5px;font-weight:700}
+.flow .step .s-desc{font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.6}
+.flow .conn{align-self:center;font-size:20px;color:var(--accent-mid);padding:6px 8px;font-weight:700}
+@media (max-width:640px){.flow{flex-direction:column}.flow .conn{transform:rotate(90deg);padding:2px}}
+
+/* ---------- tables ---------- */
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:22px}
+table.cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:14.5px;min-width:520px}
+table.cmp th,table.cmp td{padding:13px 16px;text-align:left;line-height:1.65;vertical-align:top}
+table.cmp thead th{background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;white-space:nowrap}
+table.cmp thead th:first-child{border-radius:12px 0 0 0}
+table.cmp thead th:last-child{border-radius:0 12px 0 0}
+table.cmp tbody tr:nth-child(odd){background:#fff}
+table.cmp tbody tr:nth-child(even){background:var(--card-2)}
+table.cmp tbody td{border-bottom:1px solid var(--line);color:var(--ink-2)}
+table.cmp tbody td:first-child{font-weight:700;color:var(--ink)}
+table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp tbody tr:last-child td:first-child{border-radius:0 0 0 12px}
+table.cmp tbody tr:last-child td:last-child{border-radius:0 0 12px 0}
+table.cmp .mine{color:var(--accent);font-weight:700}
+
+/* ---------- details ---------- */
+details.more{
+  margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--card);box-shadow:var(--shadow);overflow:hidden;
+}
+details.more>summary{
+  cursor:pointer;list-style:none;padding:15px 22px;font-size:14.5px;font-weight:700;
+  color:var(--accent);display:flex;align-items:center;gap:10px;user-select:none;
+}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{
+  content:"＋";font-family:var(--mono);font-size:15px;width:22px;height:22px;flex:none;
+  border:1px solid var(--accent-mid);border-radius:6px;display:flex;align-items:center;justify-content:center;
+}
+details.more[open]>summary::before{content:"−"}
+details.more>summary:hover{background:var(--accent-soft)}
+details.more>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.more-body{padding:4px 26px 26px;border-top:1px solid var(--line-2)}
+.more-body>*:first-child{margin-top:18px}
+
+/* ---------- misc ---------- */
+.rule-note{font-size:13px;color:var(--ink-3);margin-top:12px;line-height:1.7}
+ul.plain{list-style:none;margin-top:14px}
+ul.plain li{padding-left:20px;position:relative;margin-top:8px;color:var(--ink-2);font-size:15px;line-height:1.78}
+ul.plain li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--brass)}
+.divider{
+  text-align:center;padding-block:42px;
+}
+.divider span{
+  display:inline-block;font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;
+  color:var(--ink-3);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:12px 26px;
+}
+.big-vs{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;margin-top:26px}
+@media (max-width:640px){.big-vs{grid-template-columns:1fr}}
+.big-vs .n{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.big-vs .n .v{font-family:var(--mono);font-size:44px;font-weight:800;line-height:1}
+.big-vs .n .k{font-size:13.5px;color:var(--ink-2);margin-top:10px}
+.big-vs .n.a .v{color:var(--ink-3)}
+.big-vs .n.b .v{color:var(--accent)}
+.big-vs .gap{font-family:var(--mono);font-size:13px;color:var(--brass);text-align:center;font-weight:700}
+
+footer.foot{
+  border-top:1px solid var(--line);margin-top:20px;padding-block:40px 60px;
+  font-size:13.5px;color:var(--ink-3);line-height:1.8;
+}
+footer.foot b{color:var(--ink-2)}
+footer.foot .sig{margin-top:16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-2)}
+
+/* ================= TOOL ================= */
+.tool-shell{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 26px 30px;margin-top:24px}
+.tool-head .lede{max-width:64ch;color:var(--ink-2);margin:0 0 16px;font-size:15.5px;line-height:1.8}
+.tool-head .lede b{color:var(--ink)}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:22px}
+.ghost{
+  font:700 13px/1 var(--sans);color:var(--accent);
+  background:none;border:1px solid var(--line);border-radius:999px;
+  padding:9px 15px;cursor:pointer;transition:background .15s,border-color .15s;
+}
+.ghost:hover{background:var(--accent-soft);border-color:var(--accent)}
+.ghost[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.timing{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.panel{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:22px}
+.panel h4{font-size:16px;margin:0 0 6px;font-weight:700}
+.panel>p{color:var(--ink-2);font-size:13.8px;margin:0 0 16px;max-width:64ch;line-height:1.75}
+.panel p.tail{margin:16px 0 0}
+.ruletable{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}
+.ruletable th{text-align:left;font:700 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:0 14px 8px 0;border-bottom:1px solid var(--line)}
+.ruletable td{padding:10px 14px 10px 0;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
+.ruletable td:first-child{color:var(--ink);font-weight:700;white-space:nowrap}
+.ruletable tr:last-child td{border-bottom:none}
+.shapes{display:grid;gap:13px;margin-top:4px;grid-template-columns:repeat(auto-fit,minmax(158px,1fr))}
+.shape{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px 13px 13px;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+.shape .code{position:absolute;top:9px;left:11px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--brass);border:1px solid var(--line);border-radius:5px;padding:1px 7px;line-height:1.5}
+.shape svg{width:78px;height:auto;display:block;margin:2px 0 7px}
+.shape .name{font-size:14.5px;color:var(--ink);font-weight:700}
+.shape .cond{font-family:var(--mono);font-size:10.5px;color:var(--brass);text-align:center;line-height:1.6;margin-top:3px}
+.shape .plan{font-size:12px;color:var(--ink-3);text-align:center;line-height:1.6;margin-top:6px}
+.proto{display:grid;gap:0;margin-top:4px}
+.pstep{display:grid;grid-template-columns:28px 1fr;gap:13px;padding:11px 0;border-bottom:1px solid var(--line-2)}
+.pstep:last-child{border-bottom:none}
+.pstep .i{font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--line);border-radius:6px;height:25px;display:flex;align-items:center;justify-content:center;background:var(--card)}
+.pstep .t{font-size:13.8px;color:var(--ink-2);line-height:1.75}
+.pstep .t b{color:var(--ink)}
+.fields{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.fchip{font-family:var(--mono);font-size:11px;color:var(--ink-2);background:var(--brass-soft);border:1px solid var(--line);border-radius:5px;padding:5px 9px}
+.cols{display:grid;grid-template-columns:1fr;gap:24px}
+@media (min-width:940px){.cols{grid-template-columns:1fr 260px;gap:30px;align-items:start}}
+.prog{display:flex;align-items:center;gap:6px;margin-bottom:15px;flex-wrap:wrap}
+.prog-label{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.06em;margin-right:4px}
+.tick{width:24px;height:3px;border-radius:2px;background:var(--line);transition:background .25s}
+.tick.done{background:var(--accent)}
+.tick.now{background:var(--brass)}
+.qcard{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:24px}
+.qnum{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--brass);margin:0 0 8px;font-weight:600}
+.qtitle{font-size:20px;line-height:1.45;margin:0;font-weight:700;text-wrap:balance}
+.qhint{font-size:13px;color:var(--ink-3);margin:8px 0 0;max-width:56ch;line-height:1.7}
+.grouplabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 9px;display:block}
+.grouplabel.need{color:var(--brass);font-weight:700}
+.grouplabel.need::after{content:"　← 还要选这一项";letter-spacing:0;font-family:var(--sans)}
+.opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+@media (min-width:700px){.opts.two{grid-template-columns:1fr 1fr}}
+.opts.pending{outline:2px dashed var(--brass);outline-offset:8px;border-radius:10px}
+.opt{
+  display:flex;align-items:baseline;gap:11px;width:100%;text-align:left;touch-action:manipulation;
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:12px 15px;font:400 15px/1.5 var(--sans);color:var(--ink);
+  cursor:pointer;transition:border-color .15s,background .15s,transform .08s;
+}
+.opt:hover{border-color:var(--accent);background:var(--accent-soft)}
+.opt:active{transform:translateY(1px)}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.opt .k{font-family:var(--mono);font-size:12px;color:var(--ink-3);flex:none;width:14px}
+.opt.sel .k{color:var(--accent)}
+.back{margin-top:18px;background:none;border:none;padding:0;font:400 13px/1 var(--sans);color:var(--ink-3);cursor:pointer}
+.back:hover{color:var(--accent);text-decoration:underline}
+.rail{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:17px}
+.rail h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 13px;font-weight:600}
+.rail dl{margin:0;display:grid;gap:10px}
+.rail .row{display:grid;gap:1px;padding-bottom:9px;border-bottom:1px solid var(--line-2)}
+.rail .row:last-child{border-bottom:none;padding-bottom:0}
+.rail dt{font-size:12px;color:var(--ink-3)}
+.rail dd{margin:0;font-size:13.5px;color:var(--ink);font-weight:700}
+.rail .empty{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:0}
+@media (max-width:939px){.rail{order:2}}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.sheet-head{padding:20px 24px 16px;border-bottom:2px solid var(--accent);display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.sheet-head h4{font-size:20px;margin:0;font-weight:800}
+.sheet-head .stamp{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.08em;margin:4px 0 0}
+.tier{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.05em;padding:6px 12px;border-radius:999px}
+.tier.a{background:var(--accent);color:#fff}
+.tier.b,.tier.c,.tier.hold{background:var(--red-soft);color:var(--red);border:1px solid var(--red)}
+.sheet-body{padding:4px 24px 24px}
+.frow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-2)}
+.frow:last-of-type{border-bottom:none}
+.frow dt{font-size:12px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.04em}
+.frow dd{margin:0;font-size:14.5px}
+.frow dd .note{display:block;font-size:12.5px;color:var(--ink-3);margin-top:5px;line-height:1.7}
+@media (max-width:560px){.frow{grid-template-columns:1fr;gap:3px}}
+.shapeline{display:flex;align-items:center;gap:13px}
+.shapeline svg{width:44px;height:auto;flex:none}
+.section-rule{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:24px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
+.verdict{margin-top:20px;border-radius:10px;padding:17px 20px;background:var(--accent-soft);border:1px solid var(--accent)}
+.verdict.stop{background:var(--red-soft);border-color:var(--red)}
+.verdict h5{margin:0 0 8px;font-size:15.5px;font-weight:800}
+.verdict.stop h5{color:var(--red)}
+.verdict ul{margin:12px 0 0;padding-left:18px}
+.verdict li{margin-bottom:7px;font-size:14px;color:var(--ink-2);line-height:1.7}
+.verdict li:last-child{margin-bottom:0}
+.verdict p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.75}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{font:700 14px/1 var(--sans);padding:12px 20px;border-radius:8px;cursor:pointer;background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.btn.alt{background:none;color:var(--accent)}
+.btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* ================= 作品二 · 学习引擎 ================= */
+.engine-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.qnav{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.qdot{
+  width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--card);
+  font:700 13px/1 var(--mono);color:var(--ink-2);cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.qdot:hover{border-color:var(--accent);color:var(--accent)}
+.qdot.ok{background:var(--green-soft);border-color:#bcdccd;color:var(--green)}
+.qdot.bad{background:var(--red-soft);border-color:#eecfc7;color:var(--red)}
+.qdot.now{outline:2px solid var(--accent);outline-offset:2px}
+.qnav-note{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:6px}
+.engine-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.qcard2{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:24px 26px}
+.qcard2.confuse{background:var(--brass-soft);border-color:#e6d5bb}
+@media (max-width:640px){.qcard2{padding:20px 16px}}
+.qcard2 .qnum{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--brass);margin:0 0 12px;font-weight:600}
+.qcard2 .stem{font-size:17px;line-height:1.75;font-weight:700;margin:0 0 4px;text-wrap:pretty}
+.qcard2 .cintro{font-size:14.5px;color:var(--ink-2);margin:0 0 14px;line-height:1.75}
+.multi-flag{font-family:var(--sans);font-weight:700;background:var(--accent);color:#fff;border-radius:999px;padding:2px 9px;font-size:11px;letter-spacing:0}
+.multi-flag.single{background:var(--ink-3)}
+
+.termbar{margin-top:18px}
+.termhint{font-size:13.5px;color:var(--ink-2)}
+.termhint b{color:var(--brass);font-family:var(--mono)}
+.tchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tchip{
+  font:700 13.5px/1 var(--sans);color:var(--accent);background:var(--card);
+  border:1px solid var(--accent-mid);border-radius:999px;padding:9px 15px;cursor:pointer;transition:all .15s;
+}
+.tchip:hover{background:var(--accent-soft)}
+.tchip.open{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tpanel{margin-top:16px;background:var(--card);border:1px solid var(--accent-mid);border-radius:12px;padding:20px 22px}
+.tpanel h4{font-size:17px;margin:0 0 12px;font-weight:800}
+.tpanel p{margin:0 0 10px;font-size:14.8px;color:var(--ink-2);line-height:1.8}
+.tpanel p:last-child{margin-bottom:0}
+.tlab{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--brass);
+  background:var(--brass-soft);border-radius:5px;padding:3px 8px;margin-right:10px;vertical-align:2px;font-weight:700;
+}
+
+.opts2{display:grid;grid-template-columns:1fr;gap:9px;margin-top:18px}
+@media (min-width:760px){.opts2.two{grid-template-columns:1fr 1fr}}
+.opt2{
+  display:flex;align-items:baseline;gap:12px;width:100%;text-align:left;touch-action:manipulation;
+  background:var(--card);border:1px solid var(--line);border-radius:9px;padding:14px 16px;
+  font:400 15.5px/1.65 var(--sans);color:var(--ink);cursor:pointer;transition:all .15s;
+}
+.opt2:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt2.sel{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.opt2.right{border-color:var(--green);background:var(--green-soft)}
+.opt2.wrongpick{border-color:var(--red);background:var(--red-soft)}
+.opt2.dim{opacity:.5}
+.opt2 .k{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);flex:none;width:16px;font-weight:700}
+.opt2.sel .k,.opt2.right .k{color:var(--accent)}
+.opt2:disabled{cursor:default}
+
+.verdict2{margin-top:6px;border-radius:10px;padding:15px 18px;border:1px solid}
+.verdict2.ok{background:var(--green-soft);border-color:#bcdccd}
+.verdict2.bad{background:var(--red-soft);border-color:#eecfc7}
+.verdict2 h4{margin:0 0 5px;font-size:16px;font-weight:800}
+.verdict2.ok h4{color:var(--green)}
+.verdict2.bad h4{color:var(--red)}
+.verdict2 p{margin:0;font-size:14px;color:var(--ink-2)}
+
+.whybox{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.wrow{display:grid;grid-template-columns:132px 1fr;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line-2)}
+.wrow:last-child{border-bottom:none}
+.wrow.right{background:var(--green-soft)}
+@media (max-width:640px){.wrow{grid-template-columns:1fr;gap:6px}}
+.wk{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.wmark{font-size:11px;font-weight:700}
+.wrow.right .wmark{color:var(--green)}
+.wrow.wrong .wmark{color:var(--ink-3)}
+.yours{font-size:10.5px;font-family:var(--sans);background:var(--ink);color:#fff;border-radius:4px;padding:2px 6px;width:max-content}
+.wt b{font-size:14.5px;display:block;margin-bottom:5px}
+.wex{display:block;font-size:13.8px;color:var(--ink-2);line-height:1.78}
+.exambox{margin-top:18px;border-left:4px solid var(--brass);background:var(--brass-soft);border-radius:0 12px 12px 0;padding:16px 20px;font-size:14.8px;line-height:1.8;color:var(--ink)}
+.exambox .q-label{display:block;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--brass);margin-bottom:6px}
+.cexplain{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-size:14.8px;line-height:1.85;color:var(--ink-2)}
+.cexplain b{color:var(--ink)}
+
+.revstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 6px}
+@media (max-width:640px){.revstats{grid-template-columns:1fr 1fr}}
+.rs{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 12px;text-align:center}
+.rs .v{font-family:var(--mono);font-size:24px;font-weight:800;color:var(--accent)}
+.rs .v.ok{color:var(--green)}
+.rs .v.bad{color:var(--red)}
+.rs .k{font-size:12.5px;color:var(--ink-2);margin-top:5px;line-height:1.5}
+.ptable{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:4px}
+.prow{display:grid;grid-template-columns:1fr 130px;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line-2)}
+.prow:last-child{border-bottom:none}
+.pname{font-weight:700;font-size:14.5px}
+.pids{font-family:var(--mono);font-size:13px;color:var(--ink-3);text-align:right}
+@media (max-width:640px){.prow{grid-template-columns:1fr}.pids{text-align:left}}
+.hotterms{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.hotterm{
+  font:700 13.5px/1 var(--sans);color:var(--brass);background:var(--brass-soft);
+  border:1px solid #e6d5bb;border-radius:999px;padding:9px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+}
+.hotterm:hover{background:var(--card)}
+.hotterm .cnt{font-family:var(--mono);font-size:11px;background:var(--brass);color:#fff;border-radius:999px;padding:1px 7px}
+
+/* ---- knowledge cards ---- */
+.cardbox-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:22px}
+.cb-stat{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-right:6px}
+.cardbox{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin-top:18px}
+.kcard{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 14px;
+  box-shadow:var(--shadow);cursor:pointer;position:relative;transition:border-color .15s,transform .12s;
+  display:flex;flex-direction:column;
+}
+.kcard:hover{border-color:var(--accent-mid)}
+.kcard.unsure{border-color:var(--brass);background:var(--brass-soft)}
+.kcard.pulse{transform:scale(1.03);border-color:var(--brass);box-shadow:0 0 0 3px var(--brass-soft),var(--shadow)}
+.kface{}
+.kback{display:none}
+.kcard.flip .kfront{display:none}
+.kcard.flip .kback{display:block}
+.kname{display:block;font-size:16.5px;font-weight:800;color:var(--ink)}
+.khint{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:8px}
+.kback p{margin:0 0 9px;font-size:13.5px;color:var(--ink-2);line-height:1.75}
+.kback p:last-child{margin-bottom:0}
+.kmark{
+  margin-top:14px;align-self:flex-start;font:600 11.5px/1 var(--mono);color:var(--ink-3);
+  background:none;border:1px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;
+}
+.kmark:hover{border-color:var(--brass);color:var(--brass)}
+.kmark.on{background:var(--brass);border-color:var(--brass);color:#fff}
+
+/* ---- course distribution ---- */
+.dist{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+.drow{display:grid;grid-template-columns:200px 1fr 110px;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-2)}
+.drow:last-child{border-bottom:none}
+@media (max-width:760px){.drow{grid-template-columns:1fr;gap:5px;padding:12px 0}.dstat{text-align:left}}
+.dname{font-size:14px;color:var(--ink-2)}
+.dn{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-right:8px}
+.drow.done .dname{color:var(--ink);font-weight:700}
+.dbarwrap{display:flex;align-items:center;gap:10px}
+.dbar{height:10px;border-radius:999px;background:var(--accent-mid);min-width:6px}
+.drow.done .dbar{background:var(--accent)}
+.dq{font-family:var(--mono);font-size:12px;color:var(--ink-3);flex:none}
+.dstat{text-align:right}
+.dbadge{font-family:var(--mono);font-size:10.5px;font-weight:700;background:var(--accent);color:#fff;border-radius:999px;padding:4px 10px}
+.dtodo{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="页面导航">
+  <div class="bar">
+    <span class="navbrand">作品 02 · 阿里云 ACA 自学方法</span>
+    <a class="navlink" href="#turn">转折点</a>
+    <a class="navlink" href="#method">五步法</a>
+    <a class="navlink" href="#engine">试用引擎</a>
+    <a class="navlink" href="#cards">知识卡片</a>
+    <a class="navlink" href="#audit">题库审查</a>
+    <a class="navlink" href="#scale">全书结构</a>
+    <a class="navlink" href="#tob">ToB 迁移</a>
+    <div class="readbar" id="readbar"></div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="deco" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="tagrow">
+      <span class="tag">学习作品</span>
+      <span class="tag amber">阿里云 ACA 认证</span>
+      <span class="tag green">规则引擎 · 可试用</span>
+    </div>
+    <p class="subhead" style="margin-bottom:8px">AI 驱动的技术自学方法</p>
+    <h1>零技术背景，一周考取阿里云 ACA 云计算认证</h1>
+    <p class="sub"><b>一个非技术背景的人，怎么在一周内读懂一个技术领域。</b>本科金融、硕士生物经济，零技术基础，用一周自学考取阿里云 ACA 云计算认证。</p>
+    <p class="sub">这一页是那一周真正用的方法，以及它的可运行版本——<b>你现在就能试用</b>。往下是方法怎么来的、题库我怎么审的，以及这套东西在 ToB 销售里对应什么。</p>
+    <div class="cta-row">
+      <a class="cta" href="#engine">▶　试用学习引擎（课1 全 9 题）</a>
+      <a class="cta alt" href="#tob">看 ToB 迁移逻辑</a>
+    </div>
+    <div class="idrow">
+      <span class="chip"><b>李思颖</b></span>
+      <span class="chip">求职方向：云计算 / AI ToB 大客户销售 · 客户经理</span>
+      <span class="chip">shlsy9@outlook.com</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="v">1 周</div><div class="k">零技术背景<br>自学到通过认证</div></div>
+      <div class="stat"><div class="v">204</div><div class="k">道题全部审过<br>标出重复、存疑与盲区</div></div>
+      <div class="stat"><div class="v">24</div><div class="k">个术语拆成<br>大白话 + 场景 + 类比</div></div>
+      <div class="stat"><div class="v">13</div><div class="k">课的结构已拆完<br>课1 做成完整样例</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 转折点 ============ -->
+<section class="band" id="turn">
+  <div class="wrap">
+    <div class="section-title">转折点</div>
+    <p class="subhead">整套方法就是从这一句话改出来的</p>
+    <h2>我连错误选项都挑不出来，因为四个选项我都看不懂</h2>
+    <p class="lead mt">一开始我用的是最常见的办法：<b>先做题，再看解析。</b>这个办法在我身上直接失效了。不是我判断力不行——是选项里那些词，我根本没有概念。</p>
+
+    <div class="quote red">
+      <span class="q-label">当时的原话</span>
+      「我 A、B、C、D 四个选项，<b>我根本没有办法选出错误项，因为我都看不懂</b>。这就是问题所在。」
+    </div>
+
+    <p class="lead mt">这句话逼出了一个判断：<b>我卡住的不是做题技巧，是缺少解题所需的最小知识。</b>比如这道题的四个选项——</p>
+
+    <div class="card mt">
+      <p style="font-family:var(--mono);font-size:12.5px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:10px">题库第 157 题</p>
+      <ul class="plain" style="margin-top:4px">
+        <li>A. 利用<b>虚拟化</b>解耦<b>工作负载</b>与硬件，故障时自动迁移<b>实例</b></li>
+        <li>B. 支持跨<b>可用区</b>部署，构建同城<b>容灾</b></li>
+        <li>C. 应用部署在独立物理服务器上，避免与其他<b>租户</b>共享硬件</li>
+        <li>D. 数据中心通过电力、制冷、网络<b>冗余</b>降低<b>单点故障</b>风险</li>
+      </ul>
+      <p class="rule-note">虚拟化、工作负载、实例、可用区、容灾、租户、冗余、单点故障——<b>八个词，我一个都不认识。</b>在这种状态下让我「先做题再看解析」，做对做错都是随机的，学不到任何东西。</p>
+    </div>
+
+    <div class="vs">
+      <div class="bad-box">
+        <h3>✕ 通用刷题法</h3>
+        <p>先做题 → 对答案 → 看解析。<br><br>前提是你**看得懂选项**。如果术语本身就是障碍，这个循环里你唯一学到的是「这题选 B」——<b>换个场景再考同一个考点，你还是不会。</b></p>
+      </div>
+      <div class="vs-mid"><div class="vs-badge">VS</div></div>
+      <div class="good-box">
+        <h3>✓ 我的做法：先清术语</h3>
+        <p>遇到一道题，<b>先不做</b>。<br><br>先把题干和 ABCD 里所有会阻碍理解的概念拆掉，<b>而且只讲到够做这道题的深度</b>——不讲多，讲多了是另一种浪费。清完术语再做题，这时对错才有信息量。</p>
+      </div>
+    </div>
+
+    <div class="quote">
+      <span class="q-label">这一步为什么值钱</span>
+      「只讲到够做这道题的深度」这个限定，和<b>先补全术语再讲内容</b>这个顺序，是这套方法的全部。它不是学习技巧，是一种<b>面对陌生领域时的拆解顺序</b>——这个顺序在销售里同样成立，见文末 ToB 迁移。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 五步法 ============ -->
+<section class="band" id="method">
+  <div class="wrap">
+    <div class="section-title">五步法</div>
+    <p class="subhead">下面那个引擎，每道题都走这一遍</p>
+    <h2>一道题怎么拆</h2>
+
+    <div class="grid g3 mt-lg">
+      <div class="card">
+        <h3><span class="badge">1</span>先列出卡点</h3>
+        <p>题目出现，<b>但先不给选项</b>。先告诉你：这道题里有几个词可能卡住你。</p>
+      </div>
+      <div class="card">
+        <h3><span class="badge">2</span>每个词三句话</h3>
+        <p><b>大白话定义 + 业务场景 + 一个类比</b>，各一句。不超过三句——讲多了就不是「最小」了。</p>
+      </div>
+      <div class="card">
+        <h3><span class="badge">3</span>再解锁选项</h3>
+        <p>术语清完了，才把 ABCD 放出来。<b>这时候做对做错，才有信息量。</b></p>
+      </div>
+      <div class="card">
+        <h3><span class="badge">4</span>讲为什么其他错</h3>
+        <p>不只讲正确答案。ACA 大量题目是<b>在干扰项里换概念</b>，所以每个错误选项错在哪必须逐条说清。</p>
+      </div>
+      <div class="card">
+        <h3><span class="badge">5</span>反推真正的考点</h3>
+        <p>从这道题倒推「考试实际在考什么」，形成一条<b>判断规则</b>——不是背这道题，是下次换个场景也能判。</p>
+      </div>
+      <div class="card" style="border-color:var(--brass);background:var(--brass-soft)">
+        <h3><span class="badge" style="background:var(--brass);color:#fff">＋</span>错了就弹辨析题</h3>
+        <p>答错时自动弹出一道<b>孪生题</b>：同一组易混概念，换一个角度再问一次。确认你是真懂了，不是蒙对了。</p>
+      </div>
+    </div>
+
+    <div class="quote amber">
+      <span class="q-label">一条关键的判断</span>
+      第 2 步和第 3 步的<b>顺序不能换</b>。先给选项再解释术语，人会不自觉地去猜答案、去对答案，注意力全在「选哪个」上；先清术语，注意力才在「这句话在说什么」上。<b>这和体验课要先测基线再开始教，是同一条原则。</b>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 引擎 ============ -->
+<section class="band" id="engine">
+  <div class="wrap">
+    <div class="section-title">试用引擎</div>
+    <h2>课1 · 云计算概述与阿里云 · 全 9 题</h2>
+    <p class="lead mt">下面这 9 道题按题库课1 的<b>原始考点</b>重写（公共云 vs 专有云、CapEx→OpEx、弹性与按量付费、飞天与 CIPU、性能、稳定性、本质特征、轻资产），<b>场景全部换新</b>，不使用题库原文。答错会自动弹出辨析题。</p>
+
+    <div class="tool-shell">
+      <div class="engine-head">
+        <div class="qnav" id="qnav"></div>
+        <div class="engine-actions">
+          <button class="ghost" id="btnReset" type="button">重新开始</button>
+          <button class="ghost" id="btnReview" type="button">看复盘</button>
+        </div>
+      </div>
+      <div id="stage2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 知识卡片 ============ -->
+<section class="band" id="cards">
+  <div class="wrap">
+    <div class="section-title">知识卡片盒</div>
+    <h2>24 个术语，反复过</h2>
+    <p class="lead mt">引擎里出现过的每个术语都在这里。<b>点卡片翻面</b>看大白话解释、业务场景和类比；标记「还没掌握」的卡片会排到最前面，下次打开还在。</p>
+    <div class="cardbox-bar">
+      <span class="cb-stat" id="cbStat"></span>
+      <button class="ghost" id="btnShowUnsure" type="button">只看未掌握</button>
+      <button class="ghost" id="btnFlipAll" type="button">全部翻回正面</button>
+    </div>
+    <div class="cardbox" id="cardbox"></div>
+  </div>
+</section>
+
+<!-- ============ 题库审查 ============ -->
+<section class="band" id="audit">
+  <div class="wrap">
+    <div class="section-title">题库审查</div>
+    <p class="subhead">对应 ToB 的需求澄清</p>
+    <h2>题库不是拿来就能用的</h2>
+    <p class="lead mt">网上搜到的题库，我没有直接开刷，先整体审了一遍，把不能信的地方标出来。<b>这一步花了半天，但它决定了后面一周的效率。</b></p>
+
+    <div class="scrollx">
+      <table class="cmp">
+        <thead><tr><th style="width:150px">审出来的问题</th><th>具体情况</th><th style="width:220px">我的处理</th></tr></thead>
+        <tbody>
+          <tr><td>重复题</td><td>第 124 题与第 24 题内容完全相同</td><td class="mine">两题都保留，便于按题号定位，但计数时只算一次</td></tr>
+          <tr><td>答案存疑</td><td>第 91、112 题的题库标答与课程讲义的表述相抵触</td><td class="mine">红字标出，以讲义为准，考前单独确认</td></tr>
+          <tr><td>讲义盲区</td><td>部分题目的考点在 13 份讲义里查无出处</td><td class="mine">标注后另查阿里云官方文档，不靠题库标答硬记</td></tr>
+          <tr><td>题源差异</td><td>第 192–202 题风格与前文明显不同（短问答、填空式），疑似旧版题库</td><td class="mine">降低权重，讲义覆盖率低的部分不投入时间</td></tr>
+          <tr><td>OCR 错误</td><td>题目由手机截图识别提取，如 CIPU 被识别成「CCPU」</td><td class="mine">逐题修正常见识别错误，裁切不全的选项单独注明</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quote">
+      <span class="q-label">TOB 对照</span>
+      客户给你的需求清单，同样不是拿来就能用的。里面一样会有<b>重复的诉求、互相矛盾的条款、说不出出处的「听说要有」、以及从旧方案里抄过来的历史遗留</b>。销售如果照单全收直接报方案，后面一定返工。<b>先审一遍，把矛盾和无出处的标出来再谈，这一步省下的是整个项目的时间。</b>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 全书结构 ============ -->
+<section class="band" id="scale">
+  <div class="wrap">
+    <div class="section-title">全书结构</div>
+    <h2>方法可扩展，不是只对课1 有效</h2>
+    <p class="lead mt">204 道题按 13 课的讲义知识点全部归类完毕，每题标注答案与考点。<b>课1 做成了上面那个完整样例</b>；其余 12 课结构一致，方法照搬即可。</p>
+
+    <div class="dist" id="dist"></div>
+
+    <div class="quote amber">
+      <span class="q-label">为什么只做课1</span>
+      把 204 题全部做成引擎不难，只是重复劳动。<b>作品要证明的是方法跑通了，不是题量。</b>课7（云上安全，33 题）和课4（云上专属网络，27 题）才是真正的重头，但它们证明不了任何课1 证明不了的东西。
+    </div>
+  </div>
+</section>
+
+<!-- ============ ToB 迁移 ============ -->
+<section class="band" id="tob">
+  <div class="wrap">
+    <div class="section-title">ToB 迁移</div>
+    <h2>这套方法在销售里对应什么</h2>
+    <p class="lead mt">这不是「学习方法也能用在工作上」这种泛泛的话。<b>每一步都有一个具体的对应物。</b></p>
+
+    <div class="scrollx">
+      <table class="cmp">
+        <thead><tr><th style="width:46%">备考时的做法</th><th>ToB 销售里的对应</th></tr></thead>
+        <tbody>
+          <tr><td>先清术语再做题，且只讲到够做这道题的深度</td><td>先补齐客户听方案所需的最小概念，再讲方案——而且只讲到他做决策需要的深度。讲多了是自我表演</td></tr>
+          <tr><td>「我看不懂选项」不是我笨，是缺最小知识</td><td>客户听不懂你的方案，不是他不专业，是你没先清障。<b>这是销售的责任，不是客户的</b></td></tr>
+          <tr><td>每个术语配一个业务场景，不只给定义</td><td>讲产品不能只讲参数，要讲「它解决你哪个具体场景」——客户买的是场景，不是规格</td></tr>
+          <tr><td>答错弹辨析题，逼你区分易混概念</td><td>竞品 battlecard：客户最常混淆的那几组概念，提前准备好一句话说清差别</td></tr>
+          <tr><td>讲清每个错误选项错在哪</td><td>不只说「我们方案好」，要能说清<b>别的路子为什么不适合他</b>——这才是顾问，不是推销</td></tr>
+          <tr><td>从题目反推「考试真正在考什么」</td><td>从客户问的问题反推<b>他真正担心的是什么</b>。问「你们稳定性怎么样」的人，可能真正在意的是上次故障被老板问责</td></tr>
+          <tr><td>错题按<b>知识点</b>聚类，不按题号</td><td>客户异议按<b>类型</b>聚类，不按单子。同一类异议反复出现，说明是方案或话术的系统问题</td></tr>
+          <tr><td>先审题库，标出重复 / 存疑 / 无出处</td><td>先审需求清单，标出重复 / 矛盾 / 无出处的条款，再谈方案</td></tr>
+          <tr><td>「完全消除」「一定」「无需考虑」是陷阱</td><td>对客户承诺时同样不能用绝对化表述。连 SLA 都写 99.975%，不写 100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quote">
+      <span class="q-label">和另一份作品是同一个动作</span>
+      我的另一份作品是把私教业务的客户诊断做成一套规则引擎。这一份是把陌生技术领域的学习做成一套可执行流程。<br><br><b>对象不同，动作是同一个：把只存在于我脑子里的隐性判断，变成别人也能照着跑的显性规则。</b><br>第一次的对象是客户，这一次的对象是知识。
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><b>关于内容。</b>本页 9 道题按原题库课1 的考点重写，场景全部替换，不使用题库原文；术语解释、类比与判断规则均为自行撰写。课程讲义与视频版权归阿里云所有，本页不转载其原文内容。</p>
+    <p><b>关于工具。</b>与我的另一份作品一致，这是一套<b>规则引擎</b>而非对话式 AI：判定规则写死在页面里，同样的作答永远得到同样的反馈，不联网、不调用任何外部服务。做题记录仅保存在你自己的浏览器中。</p>
+    <p class="sig">李思颖 · shlsy9@outlook.com · 求职方向：云计算 / AI ToB 大客户销售 · 客户经理</p>
+  </div>
+</footer>
+
+<script>
+
+
+const TERMS = {
+  gongyouyun: { name:"公共云", plain:"云厂商建好一整套机房和服务器，切成小块租给很多家企业用，大家共用同一批底层设施。",
+    scene:"一家创业公司要上线小程序，不自己买服务器，直接在阿里云开几台——用的就是公共云。",
+    analogy:"像大型商场：商场是阿里云盖的，A 公司租一间、B 公司租一间，彼此看不到对方的货，但楼是同一栋。" },
+  zhuanyouyun: { name:"专有云", plain:"把和公共云一样的那套技术，单独搭一份部署在企业自己的机房里，只给这一家用，不对外开放。",
+    scene:"银行、医院、政务这类受监管的机构，数据依法不能出自己的网络，但又想要云的弹性，就用专有云。",
+    analogy:"像企业自建的专属发电厂：发电技术和电网公司一样，但电厂在你自己院子里，只给你供电。" },
+  tanxing: { name:"弹性", plain:"资源能随着业务量自动变多变少，忙的时候加，闲的时候退掉，不用一直养着。",
+    scene:"双十一当天订单量是平时的二十倍，弹性扩容几百台，活动结束当天全部释放。",
+    analogy:"像叫车：高峰期多叫几辆，平时不用养一支车队停在车库里。" },
+  minjie: { name:"敏捷", plain:"想用的能力已经做好在那里，开通就能用，不用自己从零搭建和调试。",
+    scene:"要用向量数据库做检索，不必研究怎么装怎么运维，云上点几下就开出来了。",
+    analogy:"像点外卖 vs 自己买菜做饭——你要的是那顿饭，不是那口锅。" },
+  capex: { name:"CapEx 资本支出", plain:"一次性掏一大笔钱买下会长期使用的东西，在财务上记成资产，再按年慢慢折旧。",
+    scene:"自建机房要先花几百万采购服务器、建机房、拉电力，这笔钱在项目开始前就得掏出去。",
+    analogy:"像全款买车：车是你的资产，但钱一次性出去了，而且车会一年年贬值。" },
+  opex: { name:"OpEx 运营支出", plain:"按实际使用量持续付的日常开支，用多少付多少，在财务上是当期费用，不是资产。",
+    scene:"云上按小时计费，这个月用得多就多付，项目停了就不再产生费用。",
+    analogy:"像打车：每次按里程付钱，不用先买车，也不承担车贬值的风险。" },
+  tco: { name:"TCO 总拥有成本", plain:"算一件事真正花多少钱，不能只看最显眼的那一项，要把所有隐性成本一起算进去。",
+    scene:"很多企业只比「云服务器月费」和「买服务器的价格」，却漏掉电力、制冷、机房租金、运维人力、闲置浪费——这些隐性成本往往占总成本六成以上。",
+    analogy:"像算养车成本：车价只是开头，保险、油、停车位、保养、折旧加起来常常比车价还多。" },
+  anliangfufei: { name:"按量付费", plain:"按实际用掉的时长或流量结算，随时开随时停，停机就不再计费。",
+    scene:"做两天的市场测试活动，用按量付费开几台机器，活动结束就释放。",
+    analogy:"像水电表：开龙头才走字，关了就不走。" },
+  baonianbaoyue: { name:"包年包月", plain:"提前买断一段时间的使用权，单价比按量便宜，但这段时间不管用不用都已经付过钱了。",
+    scene:"官网这类常年稳定运行的业务，用包年包月比按量划算。",
+    analogy:"像买月卡：天天坐地铁划算，一个月只坐三次就亏了。" },
+  xuniahua: { name:"虚拟化", plain:"用软件把一台物理服务器切成多台互相隔离的「虚拟机」，也可以把很多台合起来统一调度。",
+    scene:"你在云上买的一台 ECS，物理上可能只是某台服务器的一部分，但用起来和一台独立机器没区别。",
+    analogy:"像把一套大平层隔成几间独立公寓：各有各的门锁，互不打扰，但共用同一栋楼。" },
+  gongzuofuzai: { name:"工作负载", plain:"跑在机器上的那个具体任务本身——某个应用、某个数据库、某次计算。",
+    scene:"「把工作负载迁到云上」意思是把那些正在跑的业务程序搬过去，不是搬机器。",
+    analogy:"像货和车分开看：负载是货，服务器是车。" },
+  shili: { name:"实例", plain:"你在云上开出来的那一台具体的虚拟服务器，有自己的配置、系统和数据。",
+    scene:"「扩容 5 台实例」就是再开 5 台一模一样的虚拟服务器分担流量。",
+    analogy:"像租到手的那一间具体房间，房号、钥匙、里面的家具都是你的。" },
+  kyongqu: { name:"可用区", plain:"同一个城市里彼此独立的机房，电力和网络各自独立，但相互之间延迟很低。",
+    scene:"把服务同时部署在两个可用区，一个机房整体断电，另一个还在跑。",
+    analogy:"像同城的两个仓库：一个仓库着火，另一个还能正常发货，而且调货很快。" },
+  diyu: { name:"地域", plain:"云厂商在不同城市或国家建的大区，比如华东、华北、新加坡，彼此距离很远。",
+    scene:"用户主要在华南就把服务部署在华南地域，访问延迟更低。",
+    analogy:"地域是「城市」，可用区是「这座城市里的不同仓库」。" },
+  rongzai: { name:"容灾", plain:"提前把业务在另一个地方也准备一份，一处出事时还能继续运行。",
+    scene:"跨可用区部署，扛得住单个数据中心级别的故障。",
+    analogy:"像重要文件在两个地方各存一份，家里进水了公司那份还在。" },
+  rongyu: { name:"冗余", plain:"关键环节多准备一套备用的，坏一个不至于整体停。",
+    scene:"数据中心的电力、制冷、网络都做双路，一路断了另一路顶上。",
+    analogy:"像飞机有多台发动机，停一台还能飞。" },
+  dandiangzhang: { name:"单点故障", plain:"整条链路上有个环节只有一份，它一坏，整个系统就停。",
+    scene:"只有一台服务器、一条网线、一个电源——任何一个坏掉业务就中断。",
+    analogy:"像一串灯泡串联：坏一个，整串都不亮。" },
+  zuhu: { name:"租户", plain:"共用同一套云平台的不同客户，每一家是一个租户，彼此的数据是隔离的。",
+    scene:"「多租户」指同一批物理设施上同时服务很多家企业，互相看不到对方的数据。",
+    analogy:"同一栋写字楼里的不同公司，共用电梯和水电，但各自办公室上锁。" },
+  feitian: { name:"飞天 Apsara", plain:"阿里云自研的云计算操作系统，负责把成千上万台服务器统一调度成一个大资源池。",
+    scene:"单集群可调度超过十万台服务器，让一个数据中心用起来像一台超级计算机。",
+    analogy:"像一个超大仓库的调度中枢：十万个货架，它决定每件货放哪、怎么取最快。" },
+  cipu: { name:"CIPU", plain:"阿里云自研的一块专用硬件，把原本要靠软件做的虚拟化工作交给硬件来做，性能损耗接近零。",
+    scene:"有了它，云服务器的性能可以接近甚至媲美同配置的物理机。",
+    analogy:"像专门的收银机代替人工算账：又快又不出错，还不占用店员的时间。" },
+  sla: { name:"SLA 服务等级协议", plain:"厂商用合同写明服务的可用性承诺，达不到要赔偿，不是口头保证。",
+    scene:"单实例可用性高达 99.975%，数据可靠性最高可达 12 个 9。",
+    analogy:"像快递的「次日达，晚到赔付」——写进合同的承诺，不是宣传语。" },
+  zzyuanchihua: { name:"资源池化", plain:"把大量分散的服务器、存储、网络先汇成一个大池子，再按需要切出来分配。",
+    scene:"你要 4 核 8G，平台从池子里划一块给你，不是专门为你装一台机器。",
+    analogy:"像自助餐台：菜都先做好放在那儿，你要多少盛多少。" },
+  bingxing: { name:"并行处理", plain:"把一个大任务拆成很多小份，同时用很多台机器一起算，总时间大幅缩短。",
+    scene:"大促期间几十万张图片要转码，一次性调用几百台机器同时处理。",
+    analogy:"一个人搬一百箱货要一天，一百个人一起搬十分钟搞定。" },
+  yanchi: { name:"延迟", plain:"数据从用户那里跑到服务器再跑回来所花的时间，距离越远通常越慢。",
+    scene:"把服务部署在离用户最近的地域，打开页面明显更快。",
+    analogy:"像点外卖：楼下的店二十分钟到，跨城的店要两小时。" }
+};
+
+const QUESTIONS = [
+  {
+    id: 1, type: "single", point: "公共云 vs 专有云",
+    stem: "一家三甲医院要建影像 AI 平台。按监管要求，患者影像数据不得存放在与其他机构共享的基础设施上；但院方同时希望获得与公共云相同的弹性和技术能力。最适合的云部署模型是什么？",
+    terms: ["gongyouyun", "zhuanyouyun", "tanxing", "zuhu"],
+    options: [
+      { k: "A", t: "公共云，对数据做全链路加密" },
+      { k: "B", t: "传统物理机房自建一套虚拟化平台" },
+      { k: "C", t: "专有云" },
+      { k: "D", t: "在公共云上开多个账号做隔离部署" }
+    ],
+    answer: ["C"],
+    why: {
+      A: "加密解决的是「数据被看到」的问题，但题目要求的是「不得存放在共享的基础设施上」——这是物理层面的要求，加密动不了它。",
+      B: "自建虚拟化能满足数据不出院，但它拿不到云的弹性和技术能力，题目两个条件只满足了一个。",
+      C: "专有云 = 公共云同一套技术，单独部署在机构自己的数据中心，既满足数据不共享，又保留云的弹性与技术栈。两个条件同时成立。",
+      D: "开几个账号只是逻辑隔离，底层设施仍然是共享的公共基础设施，不满足监管要求。"
+    },
+    exam: "考的不是「哪个云更好」，是**能不能从题干里提取出两个必须同时满足的约束**：① 数据不能落在共享设施上 ② 还要保留云能力。只满足一个的选项全错。",
+    confuse: "yun-type"
+  },
+  {
+    id: 2, type: "single", point: "CapEx 转 OpEx",
+    stem: "一家连锁餐饮企业的财务总监在评估上云。他最关心的是财务报表会发生什么变化。从财务角度看，迁移到公共云带来的最根本变化是什么？",
+    terms: ["capex", "opex", "tco"],
+    options: [
+      { k: "A", t: "云上总支出一定低于自建，这是上云的首要目的" },
+      { k: "B", t: "将前期资本支出（CapEx）转为随用量变化的运营支出（OpEx）" },
+      { k: "C", t: "彻底消除 IT 基础设施层面的开支，实现零投入运营" },
+      { k: "D", t: "可一次性预付三年费用，通过长期合约拿到最大折扣" }
+    ],
+    answer: ["B"],
+    why: {
+      A: "上云不保证总支出更低，要看具体场景做 TCO 测算。把「一定更便宜」当成答案是最常见的错。",
+      B: "这是财务模型本身的变化：钱从「先掏一大笔买资产、再逐年折旧」变成「按实际用量持续付费」。这才叫「最根本」。",
+      C: "云不是免费的，只是付费方式变了。「零投入」是明显的绝对化表述。",
+      D: "预付折扣是一种计费选项，不是财务模型的根本变化，而且它反而更像 CapEx。"
+    },
+    exam: "考点是**「最根本的变化」这个限定词**。上云确实可能省钱、可能有折扣，但那些是结果；财务模型从 CapEx 变成 OpEx 才是原因。看到「最根本 / 本质 / 根本原因」，要挑那个解释其他现象的选项。",
+    confuse: "capex-opex"
+  },
+  {
+    id: 3, type: "single", point: "固定资产投资转按需支出",
+    stem: "一个五人创业团队准备上线一款小程序，但对未来半年的用户增长完全无法预估。与传统采购物理服务器相比，选择公共云最根本的财务优势是什么？",
+    terms: ["capex", "opex", "anliangfufei", "tanxing"],
+    options: [
+      { k: "A", t: "云服务器单价低于自建同配置物理机，直接降低 IT 支出" },
+      { k: "B", t: "云厂商会承担应用的开发与运维成本" },
+      { k: "C", t: "通过一次性购买三年预留实例锁定最低成本" },
+      { k: "D", t: "将固定资产投资转为按需运营支出，降低前期试错门槛" }
+    ],
+    answer: ["D"],
+    why: {
+      A: "单价高低取决于具体规格和用量，不是普遍成立的结论，更不是「最根本」。",
+      B: "云厂商只负责基础设施，应用的开发和运维仍然是你自己的事。",
+      C: "在用户量完全无法预估的情况下锁死三年，恰恰是把按需的优势丢掉了。",
+      D: "关键词是「无法预估」。不确定的时候，最有价值的是不用先押注——把重资产投入变成按需支出，试错成本才降得下来。"
+    },
+    exam: "这题和上一题**表面场景完全不同（创业团队 vs 餐饮 CFO），底层是同一个考点**。ACA 很多题就是换个场景考同一条规则。判断规则：看到「前期采购 / 需求不确定 / 试错 / 固定资产」→ 传统 IT 要 CapEx → 云是按需 OpEx → 降低前期投入和试错成本。",
+    confuse: "capex-opex"
+  },
+  {
+    id: 4, type: "multi", point: "弹性与按量付费的核心优势",
+    stem: "与自建机房相比，云计算在资源获取和成本方面有哪些核心优势？（多选）",
+    terms: ["tanxing", "anliangfufei", "baonianbaoyue", "zzyuanchihua"],
+    options: [
+      { k: "A", t: "弹性伸缩，自动适应负载波动" },
+      { k: "B", t: "按实际使用量计费，且单价固定不随用量规模变化" },
+      { k: "C", t: "资源可灵活获取，但通常需要签订至少一年的服务合同" },
+      { k: "D", t: "分钟级完成资源开通与释放" }
+    ],
+    answer: ["A", "D"],
+    why: {
+      A: "对。弹性是云最核心的能力之一：忙时扩、闲时缩。",
+      B: "错在「单价固定不随规模变化」。云有规模化效应，用量越大通常单价越低；而且这句话把「按量付费」的优势说成了限制。",
+      C: "错在「需签至少一年合同」。按量付费恰恰不需要长期承诺，这句话描述的是传统采购。",
+      D: "对。自建从采购到上架要数周甚至数月，云上是分钟级。"
+    },
+    exam: "多选题的陷阱几乎都藏在**限定词**里：「单价固定不随规模变化」「需签至少一年」——选项前半句是对的，后半句加了个错误限定。做多选时逐个选项拆成两半读。",
+    confuse: "danjia"
+  },
+  {
+    id: 5, type: "multi", point: "飞天操作系统与 CIPU",
+    stem: "关于阿里云的技术能力和基础设施，以下描述正确的有哪些？（多选）",
+    terms: ["feitian", "cipu", "xuniahua", "kyongqu", "diyu"],
+    options: [
+      { k: "A", t: "自研飞天（Apsara）云计算操作系统，单集群可调度超十万台服务器" },
+      { k: "B", t: "自研 CIPU 对计算、存储、网络资源做硬件加速，虚拟化损耗接近零" },
+      { k: "C", t: "各地域和可用区的服务能力完全相同，无需考虑部署位置的选择" },
+      { k: "D", t: "在全球多个地域运营可用区，支持跨地域容灾和就近部署" }
+    ],
+    answer: ["A", "B", "D"],
+    why: {
+      A: "对。飞天把一个数据中心变成「一台超级计算机」，单集群超十万台。",
+      B: "对。CIPU 是硬件层面的加速，让虚拟化的性能损耗接近零。注意题库原题此处印成了「CCPU」，是 OCR 错误，正确写法是 CIPU。",
+      C: "错。不同地域、不同可用区的服务能力和可用产品并不完全一致，部署位置恰恰需要选。",
+      D: "对。全球多地域、多可用区，是跨地域容灾和就近部署的前提。"
+    },
+    exam: "选项 C 是典型的**绝对化干扰项**——「完全相同」「无需考虑」。ACA 里凡是出现「都一样」「无需」「完全消除」「一定」，先高度怀疑。",
+    confuse: "diyu-az"
+  },
+  {
+    id: 6, type: "multi", point: "性能优势（并行 / 就近 / 硬件迭代）",
+    stem: "与自建 IT 基础设施相比，云计算在性能方面有哪些优势？（多选）",
+    terms: ["bingxing", "yanchi", "zzyuanchihua", "xuniahua"],
+    options: [
+      { k: "A", t: "可按需调用海量资源实现大规模并行处理，缩短复杂任务耗时" },
+      { k: "B", t: "利用全球基础设施就近部署服务，降低用户访问延迟" },
+      { k: "C", t: "可即时获取最新硬件（如 CPU/GPU），持续享受硬件性能提升" },
+      { k: "D", t: "云服务器采用共享资源池，高负载时段的性能表现与独占物理机完全一致" }
+    ],
+    answer: ["A", "B", "C"],
+    why: {
+      A: "对。一个人搬一百箱要一天，一百个人十分钟——这是并行带来的性能优势。",
+      B: "对。物理距离决定延迟下限，就近部署是最直接的提速手段。",
+      C: "对。自建服务器买了就是那代硬件，云上可以随时换到最新一代。",
+      D: "错在「完全一致」。CIPU 让损耗接近零，但「接近零」不等于「完全一致」。"
+    },
+    exam: "D 和上一题的 C 是同一类陷阱：把「接近」改写成「完全」。**记住阿里云官方表述是「接近零损耗」「媲美物理机」，不是「等同」。**",
+    confuse: "jiejin-wanquan"
+  },
+  {
+    id: 7, type: "multi", point: "稳定性优势（实例迁移 / 跨可用区 / 冗余）",
+    stem: "以下关于云平台稳定性优势的描述，正确的有哪些？（多选）",
+    terms: ["xuniahua", "gongzuofuzai", "shili", "kyongqu", "rongzai", "rongyu", "dandiangzhang", "zuhu", "sla"],
+    options: [
+      { k: "A", t: "利用虚拟化解耦工作负载与硬件，故障时自动迁移实例，缩短恢复时间" },
+      { k: "B", t: "支持跨可用区部署，可构建同城容灾架构，抵御单数据中心级故障" },
+      { k: "C", t: "云平台将用户应用部署在独立的物理服务器上，避免与其他租户共享硬件" },
+      { k: "D", t: "数据中心通过电力、制冷、网络等基础设施冗余，降低单点故障风险" }
+    ],
+    answer: ["A", "B", "D"],
+    why: {
+      A: "对。因为负载和具体硬件解耦了，某台物理机坏了可以把实例迁到别的机器上，不用等修好。",
+      B: "对。同城两个可用区互为备份，一个机房整体故障业务还在。",
+      C: "错。这描述的是独占物理机/托管模式，而且它恰恰放弃了虚拟化带来的自动迁移能力——是稳定性的反面，不是优势。",
+      D: "对。冗余的目的就是消除单点故障。"
+    },
+    exam: "C 值得单独记：**「独占物理服务器」听起来更安全，但在云的语境里它是干扰项。**云的稳定性来自虚拟化 + 冗余 + 跨可用区，而不是来自「不和别人共享」。",
+    confuse: "duzhan"
+  },
+  {
+    id: 8, type: "multi", point: "云计算的本质特征",
+    stem: "以下哪些描述正确体现了云计算的本质特征？（多选）",
+    terms: ["zzyuanchihua", "xuniahua", "anliangfufei", "minjie"],
+    options: [
+      { k: "A", t: "将计算、存储、网络、数据库、AI 等能力封装为标准化的开箱即用服务" },
+      { k: "B", t: "通过互联网以按需使用、按量付费的方式交付算力资源" },
+      { k: "C", t: "通过资源池化和虚拟化实现资源灵活调度，且虚拟化开销已被完全消除" },
+      { k: "D", t: "要求用户预先规划并采购未来三到五年所需的计算资源" }
+    ],
+    answer: ["A", "B"],
+    why: {
+      A: "对。把「技术杂活」封装成标准化服务，让企业专注自己的业务——这是云的本质之一。",
+      B: "对。按需使用、按量付费、通过互联网交付，这是云的定义性特征。",
+      C: "前半句对，错在「完全消除」。又是一次「接近 → 完全」的偷换。",
+      D: "错。这是传统 IT 的做法，正是云要解决的问题。"
+    },
+    exam: "这题把前面几个陷阱集中考了一遍：**C 是绝对化，D 是把传统 IT 的特征说成云的特征**。「云 vs 传统 IT」这组对立是课1 的主线，几乎每道题都在考它。",
+    confuse: "jiejin-wanquan"
+  },
+  {
+    id: 9, type: "multi", point: "弹性与轻资产的成本优势",
+    stem: "你负责的在线教育平台每年只有寒暑假两个月是算力高峰（大量视频转码与直播推流），其余时间需求极低。相比自建服务器，选择云资源有哪些优势？（多选）",
+    terms: ["tanxing", "capex", "opex", "anliangfufei", "tco"],
+    options: [
+      { k: "A", t: "避免为短期峰值做重资产投资，减少平峰期的资产闲置" },
+      { k: "B", t: "高峰期可快速弹性扩容 GPU 实例，匹配突发算力需求" },
+      { k: "C", t: "免去硬件选型、采购和物理环境维护" },
+      { k: "D", t: "云服务器可根据负载自动切换不同型号的 GPU，始终匹配最佳性价比配置" }
+    ],
+    answer: ["A", "B", "C"],
+    why: {
+      A: "对。为两个月的峰值买一整年的服务器，其余十个月都在闲置——这正是自建最大的浪费。",
+      B: "对。峰值来了分钟级扩，峰值过了就释放。",
+      C: "对。硬件选型、采购、机房环境这些「技术杂活」都由云厂商承担。",
+      D: "错。自动切换 GPU 型号不是云的标准能力，实例规格需要你自己选择和变配。这是凭感觉编出来的「听起来很美」的选项。"
+    },
+    exam: "D 是另一类干扰项：**不是绝对化，而是虚构一个并不存在的自动化能力。**判断方法——如果一个功能听起来「太智能了、什么都替你做了」，多半是编的。",
+    confuse: "danjia"
+  }
+];
+
+const CONFUSE = {
+  "yun-type": {
+    title: "辨析：公共云 / 专有云 / 自建机房",
+    intro: "你刚才这题错在没把两个约束同时拿住。再用一道题确认一下边界。",
+    prompt: "一家普通电商公司说：「双十一算力需求特别大，平时很少。我没有特殊监管要求，也不想自己维护服务器，希望需要时快速加、不需要时释放。」应该选什么？",
+    options: [
+      { t: "公共云", correct: true },
+      { t: "专有云", correct: false }
+    ],
+    explain: "**公共云。**判断规则只有两条：<br>① 有特殊监管 / 数据不能落在共享设施上 → 专有云<br>② 没有这类约束、只想要弹性和免运维 → 公共云<br>专有云的代价是你要自己有数据中心、成本高得多。没有监管要求还上专有云，是花钱买了不需要的东西。"
+  },
+  "capex-opex": {
+    title: "辨析：CapEx 与 OpEx 不是「贵和便宜」",
+    intro: "这一组最容易错的地方，是把它理解成「云更便宜」。不是。",
+    prompt: "一家公司自建机房花 300 万，上云五年总共也花 300 万。那么上云在财务上还有意义吗？",
+    options: [
+      { t: "有意义，钱的性质变了", correct: true },
+      { t: "没意义，总额一样", correct: false }
+    ],
+    explain: "**有意义。**CapEx→OpEx 改变的是**钱的性质和时间分布**，不是总额：<br>· 300 万一次性掏出去 vs 五年里按用量慢慢付——现金流压力完全不同<br>· 一次性投入押注的是「我猜对了未来需求」，按需付费则允许猜错<br>· 项目中途叫停，自建的服务器退不掉，云上停了就不再计费<br>所以正确答案永远是「财务模型变了」，而不是「更便宜」。"
+  },
+  "danjia": {
+    title: "辨析：读选项要拆成两半",
+    intro: "你错的这题，干扰项的前半句都是对的。",
+    prompt: "「按实际使用量计费，且单价固定不随用量规模变化」——这个选项错在哪里？",
+    options: [
+      { t: "错在后半句的限定", correct: true },
+      { t: "整句都是错的", correct: false }
+    ],
+    explain: "**错在后半句。**「按实际使用量计费」完全正确，「单价固定不随规模变化」才是错的——云有规模化效应，用量越大单价通常越低。<br><br>这是多选题最主要的出题手法：**真话 + 一个假的限定词**。所以读每个选项都要拆成两半分别判断，只要有一半错，整个选项就不能选。"
+  },
+  "diyu-az": {
+    title: "辨析：地域 vs 可用区",
+    intro: "这两个词经常一起出现，但不是一回事。",
+    prompt: "「把服务同时部署在两个机房，抵御单个数据中心整体故障」——这叫什么？",
+    options: [
+      { t: "跨可用区部署（同城容灾）", correct: true },
+      { t: "跨地域部署（异地容灾）", correct: false }
+    ],
+    explain: "**跨可用区。**<br>· **地域**＝城市级，比如华东1、华北2、新加坡，彼此距离远，延迟高<br>· **可用区**＝同一地域内彼此独立的机房，电力和网络各自独立，但互相延迟很低<br><br>所以：同城容灾 = 跨可用区；异地容灾 = 跨地域。题目里出现「同城」就锁可用区，出现「异地 / 跨区域」才是地域。"
+  },
+  "jiejin-wanquan": {
+    title: "辨析：「接近」不等于「完全」",
+    intro: "你这题错在一个限定词上，这个坑在 ACA 里反复出现。",
+    prompt: "阿里云关于 CIPU 的官方表述是哪一个？",
+    options: [
+      { t: "虚拟化损耗接近零，性能媲美物理机", correct: true },
+      { t: "虚拟化开销已被完全消除，性能等同物理机", correct: false }
+    ],
+    explain: "**是「接近零」「媲美」，不是「完全消除」「等同」。**<br><br>这类题不考技术，考的是你有没有注意限定词。凡是出现这几个词，优先怀疑：<br>「完全」「彻底」「消除」「零」「一定」「始终」「都」「无需考虑」<br><br>技术产品几乎不会做绝对承诺——连 SLA 都是写 99.975%，不是 100%。"
+  },
+  "duzhan": {
+    title: "辨析：独占物理机 ≠ 更稳定",
+    intro: "这个选项之所以是陷阱，是因为它听起来更安全。",
+    prompt: "「把应用部署在独立物理服务器上，不与其他租户共享硬件」——在云的语境里，这属于？",
+    options: [
+      { t: "干扰项，它放弃了云的稳定性机制", correct: true },
+      { t: "云稳定性的优势之一", correct: false }
+    ],
+    explain: "**干扰项。**云的稳定性来自三件事：<br>① **虚拟化**——负载和硬件解耦，机器坏了实例能自动迁走<br>② **跨可用区**——一个机房整体故障，另一个还在<br>③ **冗余**——电力、制冷、网络都有备份<br><br>而「独占物理机」恰恰把第 ① 条的能力放弃了：机器一坏，没有别的地方可以自动迁。它是托管模式的特征，不是云的优势。"
+  }
+};
+
+const COURSE_DIST = [
+  { n:1,  name:"云计算概述与阿里云",     q:9,  done:true },
+  { n:2,  name:"云上计算服务",           q:20 },
+  { n:3,  name:"全球基础设施与网络加速", q:17 },
+  { n:4,  name:"云上专属网络",           q:27 },
+  { n:5,  name:"云上存储服务",           q:20 },
+  { n:6,  name:"云数据库服务",           q:16 },
+  { n:7,  name:"云上安全",               q:33 },
+  { n:8,  name:"可观测与监控",           q:9 },
+  { n:9,  name:"应用现代化与数据服务",   q:12 },
+  { n:10, name:"云上 AI 应用",           q:11 },
+  { n:11, name:"云上费用与成本",         q:17 },
+  { n:12, name:"上云规划",               q:6 },
+  { n:13, name:"卓越架构",               q:7 }
+];
+
+
+
+"use strict";
+
+/* ---------------- storage ---------------- */
+const KEY = "lsy.aca.v1";
+let S = { answers: {}, unsure: {} };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) {
+    const p = JSON.parse(raw);
+    if (p && typeof p === "object") {
+      S.answers = p.answers || {};
+      S.unsure = p.unsure || {};
+    }
+  }
+} catch (e) { /* private window / blocked storage — run without persistence */ }
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+}
+
+/* ---------------- runtime state ---------------- */
+let cur = 0, phase = "terms", picked = [], openTerm = null, confusePick = null, onlyUnsure = false;
+
+const $ = s => document.querySelector(s);
+const stage = $("#stage2"), qnav = $("#qnav");
+const esc = t => String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const md = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+const mdRaw = t => String(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+
+function navH(){ const n = document.querySelector(".topnav"); return n ? n.offsetHeight : 0; }
+function keepInView(sel){
+  const el = stage.querySelector(sel) || stage.firstElementChild;
+  if (!el) return;
+  const r = el.getBoundingClientRect(), vh = window.innerHeight, nh = navH();
+  const fits = r.height <= vh - nh - 40;
+  if (fits && r.top >= nh + 8 && r.bottom <= vh - 8) return;
+  window.scrollTo({ top: window.scrollY + r.top - (nh + 16), behavior: "smooth" });
+}
+
+/* ---------------- question nav ---------------- */
+function renderNav(){
+  qnav.innerHTML = QUESTIONS.map(function(q, i){
+    const a = S.answers[q.id];
+    const st = !a ? "todo" : (a.correct ? "ok" : "bad");
+    return '<button type="button" class="qdot ' + st + (i === cur ? " now" : "") +
+      '" data-go="' + i + '" title="' + esc(q.point) + '">' + q.id + "</button>";
+  }).join("") +
+  '<span class="qnav-note" id="qnavNote"></span>';
+  const done = Object.keys(S.answers).length, ok = Object.values(S.answers).filter(a => a.correct).length;
+  const note = $("#qnavNote");
+  if (note) note.textContent = done ? ("已做 " + done + " / 9　答对 " + ok) : "共 9 题 · 约 10 分钟";
+}
+
+/* ---------------- phases ---------------- */
+function renderTerms(){
+  const q = QUESTIONS[cur];
+  const chips = q.terms.map(function(k){
+    const t = TERMS[k];
+    return '<button type="button" class="tchip' + (openTerm === k ? " open" : "") + '" data-term="' + k + '">' +
+      esc(t.name) + "</button>";
+  }).join("");
+  let panel = "";
+  if (openTerm && TERMS[openTerm]){
+    const t = TERMS[openTerm];
+    panel = '<div class="tpanel">' +
+      '<h4>' + esc(t.name) + "</h4>" +
+      '<p><span class="tlab">大白话</span>' + esc(t.plain) + "</p>" +
+      '<p><span class="tlab">业务场景</span>' + esc(t.scene) + "</p>" +
+      '<p><span class="tlab">类比</span>' + esc(t.analogy) + "</p>" +
+      "</div>";
+  }
+  const seen = q.terms.filter(k => (S.unsure[k] !== undefined) || k === openTerm).length;
+  stage.innerHTML =
+    '<div class="qcard2">' +
+      '<p class="qnum">第 ' + q.id + ' 题 · ' + esc(q.point) + '　|　步骤 1–2：先清术语</p>' +
+      '<p class="stem">' + esc(q.stem) + "</p>" +
+      '<div class="termbar"><span class="termhint">这道题里有 <b>' + q.terms.length +
+        '</b> 个词可能卡住你——点开看大白话解释，看完再做题</span></div>' +
+      '<div class="tchips">' + chips + "</div>" +
+      panel +
+      '<div class="actions"><button class="btn" type="button" data-act="toAnswer">我看完了，去做题 →</button></div>' +
+    "</div>";
+}
+
+function renderAnswer(){
+  const q = QUESTIONS[cur];
+  const multi = q.type === "multi";
+  const opts = q.options.map(function(o){
+    const sel = picked.indexOf(o.k) > -1;
+    return '<button type="button" class="opt2' + (sel ? " sel" : "") + '" data-pick="' + o.k + '">' +
+      '<span class="k">' + o.k + "</span><span>" + esc(o.t) + "</span></button>";
+  }).join("");
+  stage.innerHTML =
+    '<div class="qcard2">' +
+      '<p class="qnum">第 ' + q.id + ' 题 · ' + esc(q.point) + '　|　步骤 3：做题' +
+        (multi ? '　<span class="multi-flag">多选</span>' : '　<span class="multi-flag single">单选</span>') + "</p>" +
+      '<p class="stem">' + esc(q.stem) + "</p>" +
+      '<div class="opts2">' + opts + "</div>" +
+      '<div class="actions">' +
+        (multi ? '<button class="btn" type="button" data-act="submit"' + (picked.length ? "" : " disabled") + '>提交答案</button>' : "") +
+        '<button class="btn alt" type="button" data-act="backTerms">← 回去看术语</button>' +
+      "</div>" +
+    "</div>";
+}
+
+function grade(q, pick){
+  const a = q.answer.slice().sort().join(""), p = pick.slice().sort().join("");
+  return a === p;
+}
+
+function renderResult(){
+  const q = QUESTIONS[cur];
+  const rec = S.answers[q.id];
+  const correct = rec.correct, pick = rec.picked;
+  const rows = q.options.map(function(o){
+    const isAns = q.answer.indexOf(o.k) > -1;
+    const chose = pick.indexOf(o.k) > -1;
+    let cls = isAns ? "right" : "wrong";
+    let mark = isAns ? "✓ 正确" : "✕ 错误";
+    let yours = chose ? '<span class="yours">你选了</span>' : "";
+    return '<div class="wrow ' + cls + '">' +
+      '<div class="wk">' + o.k + '<span class="wmark">' + mark + "</span>" + yours + "</div>" +
+      '<div class="wt"><b>' + esc(o.t) + "</b><span class=\"wex\">" + mdRaw(esc(q.why[o.k])) + "</span></div>" +
+      "</div>";
+  }).join("");
+  const conf = CONFUSE[q.confuse];
+  stage.innerHTML =
+    '<div class="qcard2">' +
+      '<p class="qnum">第 ' + q.id + ' 题 · ' + esc(q.point) + '　|　步骤 4–5：为什么其他选项错 · 反推考点</p>' +
+      '<div class="verdict2 ' + (correct ? "ok" : "bad") + '">' +
+        "<h4>" + (correct ? "✓ 答对了" : "✕ 答错了") + "</h4>" +
+        "<p>正确答案：<b>" + q.answer.join(" ") + "</b>　你的作答：<b>" + (pick.length ? pick.join(" ") : "未选") + "</b></p>" +
+      "</div>" +
+      '<div class="whybox">' + rows + "</div>" +
+      '<div class="exambox"><span class="q-label">反推考点</span>' + mdRaw(esc(q.exam)) + "</div>" +
+      '<div class="actions">' +
+        (correct
+          ? '<button class="btn alt" type="button" data-act="confuse">再看一道辨析题</button>'
+          : '<button class="btn" type="button" data-act="confuse">做一道辨析题　→ ' + esc(conf.title.replace(/^辨析：/, "")) + "</button>") +
+        (cur < QUESTIONS.length - 1
+          ? '<button class="btn' + (correct ? "" : " alt") + '" type="button" data-act="next">下一题 →</button>'
+          : '<button class="btn" type="button" data-act="review">看复盘 →</button>') +
+      "</div>" +
+    "</div>";
+}
+
+function renderConfuse(){
+  const q = QUESTIONS[cur], c = CONFUSE[q.confuse];
+  const opts = c.options.map(function(o, i){
+    let cls = "opt2";
+    if (confusePick !== null) cls += o.correct ? " right" : (confusePick === i ? " wrongpick" : " dim");
+    return '<button type="button" class="' + cls + '" data-cpick="' + i + '"' +
+      (confusePick !== null ? " disabled" : "") + '><span class="k">' + (i + 1) + "</span><span>" + esc(o.t) + "</span></button>";
+  }).join("");
+  stage.innerHTML =
+    '<div class="qcard2 confuse">' +
+      '<p class="qnum">辨析题　|　' + esc(c.title) + "</p>" +
+      '<p class="cintro">' + esc(c.intro) + "</p>" +
+      '<p class="stem">' + esc(c.prompt) + "</p>" +
+      '<div class="opts2 two">' + opts + "</div>" +
+      (confusePick !== null ? '<div class="cexplain">' + c.explain + "</div>" : "") +
+      (confusePick !== null
+        ? '<div class="actions">' +
+            (cur < QUESTIONS.length - 1
+              ? '<button class="btn" type="button" data-act="next">回到主线，下一题 →</button>'
+              : '<button class="btn" type="button" data-act="review">看复盘 →</button>') +
+          "</div>"
+        : "") +
+    "</div>";
+}
+
+function renderReview(){
+  const done = QUESTIONS.filter(q => S.answers[q.id]);
+  const wrong = done.filter(q => !S.answers[q.id].correct);
+  const ok = done.length - wrong.length;
+  const unsureKeys = Object.keys(S.unsure).filter(k => S.unsure[k]);
+
+  const byPoint = {};
+  wrong.forEach(function(q){ (byPoint[q.point] = byPoint[q.point] || []).push(q.id); });
+  const pointRows = Object.keys(byPoint).map(function(p){
+    return '<div class="prow"><div class="pname">' + esc(p) + "</div><div class=\"pids\">题 " +
+      byPoint[p].join("、") + "</div></div>";
+  }).join("");
+
+  const termCount = {};
+  wrong.forEach(function(q){ q.terms.forEach(function(k){ termCount[k] = (termCount[k] || 0) + 1; }); });
+  const hotTerms = Object.keys(termCount).sort((a, b) => termCount[b] - termCount[a]).slice(0, 6);
+
+  stage.innerHTML =
+    '<div class="qcard2">' +
+      '<p class="qnum">复盘　|　错题按考点聚类，不按题号</p>' +
+      '<div class="revstats">' +
+        '<div class="rs"><div class="v">' + done.length + " / 9</div><div class=\"k\">已作答</div></div>" +
+        '<div class="rs"><div class="v ok">' + ok + '</div><div class="k">答对</div></div>' +
+        '<div class="rs"><div class="v bad">' + wrong.length + '</div><div class="k">答错</div></div>' +
+        '<div class="rs"><div class="v">' + unsureKeys.length + '</div><div class="k">标记未掌握的术语</div></div>' +
+      "</div>" +
+      (done.length === 0
+        ? '<p class="rule-note">还没有作答记录。从第 1 题开始吧。</p>'
+        : (wrong.length
+            ? '<p class="section-rule">错在这些考点上</p><div class="ptable">' + pointRows + "</div>" +
+              (hotTerms.length
+                ? '<p class="section-rule">这些术语反复出现在你的错题里</p><div class="hotterms">' +
+                  hotTerms.map(k => '<button type="button" class="hotterm" data-jumpterm="' + k + '">' +
+                    esc(TERMS[k].name) + '<span class="cnt">' + termCount[k] + "</span></button>").join("") +
+                  '</div><p class="rule-note">按考点聚类而不是按题号，才看得出<b>缺的是哪一块知识</b>——同一个术语在多道错题里出现，说明问题不在题，在这个概念本身。</p>'
+                : "")
+            : '<p class="rule-note">9 题全对。可以去<a href="#cards">知识卡片盒</a>把术语再过一遍，或者重新开始验证一下不是蒙的。</p>')) +
+      '<div class="actions">' +
+        '<button class="btn alt" type="button" data-act="first">从第 1 题重新走一遍</button>' +
+        '<a class="btn" href="#cards">去知识卡片盒 →</a>' +
+      "</div>" +
+    "</div>";
+}
+
+function render(scroll){
+  renderNav();
+  if (phase === "terms") renderTerms();
+  else if (phase === "answer") renderAnswer();
+  else if (phase === "result") renderResult();
+  else if (phase === "confuse") renderConfuse();
+  else renderReview();
+  if (scroll) requestAnimationFrame(function(){ keepInView(".qcard2"); });
+}
+
+/* ---------------- delegated events (survive every re-render) ---------------- */
+stage.addEventListener("click", function(e){
+  const t = e.target.closest("[data-term]");
+  if (t){ openTerm = (openTerm === t.dataset.term) ? null : t.dataset.term; render(); return; }
+
+  const p = e.target.closest("[data-pick]");
+  if (p){
+    const q = QUESTIONS[cur], k = p.dataset.pick;
+    if (q.type === "multi"){
+      const i = picked.indexOf(k);
+      if (i > -1) picked.splice(i, 1); else picked.push(k);
+      render();
+    } else {
+      picked = [k];
+      S.answers[q.id] = { picked: picked.slice(), correct: grade(q, picked) };
+      save(); phase = "result"; render(true);
+    }
+    return;
+  }
+
+  const c = e.target.closest("[data-cpick]");
+  if (c){ confusePick = parseInt(c.dataset.cpick, 10); render(); return; }
+
+  const j = e.target.closest("[data-jumpterm]");
+  if (j){
+    const k = j.dataset.jumpterm;
+    const card = document.querySelector('.kcard[data-k="' + k + '"]');
+    if (card){
+      card.classList.add("flip", "pulse");
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(function(){ card.classList.remove("pulse"); }, 1600);
+    }
+    return;
+  }
+
+  const a = e.target.closest("[data-act]");
+  if (!a) return;
+  const act = a.dataset.act;
+  if (act === "toAnswer"){ phase = "answer"; openTerm = null; render(true); }
+  else if (act === "backTerms"){ phase = "terms"; render(true); }
+  else if (act === "submit"){
+    const q = QUESTIONS[cur];
+    if (!picked.length) return;
+    S.answers[q.id] = { picked: picked.slice(), correct: grade(q, picked) };
+    save(); phase = "result"; render(true);
+  }
+  else if (act === "confuse"){ confusePick = null; phase = "confuse"; render(true); }
+  else if (act === "next"){
+    if (cur < QUESTIONS.length - 1){ cur++; picked = []; openTerm = null; confusePick = null; phase = "terms"; render(true); }
+    else { phase = "review"; render(true); }
+  }
+  else if (act === "review"){ phase = "review"; render(true); }
+  else if (act === "first"){ cur = 0; picked = []; openTerm = null; phase = "terms"; render(true); }
+});
+
+qnav.addEventListener("click", function(e){
+  const b = e.target.closest("[data-go]");
+  if (!b) return;
+  cur = parseInt(b.dataset.go, 10);
+  const q = QUESTIONS[cur];
+  const rec = S.answers[q.id];
+  picked = rec ? rec.picked.slice() : [];
+  openTerm = null; confusePick = null;
+  phase = rec ? "result" : "terms";
+  render(true);
+});
+
+$("#btnReview").addEventListener("click", function(){ phase = "review"; render(true); });
+$("#btnReset").addEventListener("click", function(){
+  S.answers = {}; save();
+  cur = 0; picked = []; openTerm = null; confusePick = null; phase = "terms";
+  render(true);
+});
+
+/* ---------------- knowledge cards ---------------- */
+const cardbox = $("#cardbox");
+function renderCards(){
+  const keys = Object.keys(TERMS).sort(function(a, b){
+    return (S.unsure[b] ? 1 : 0) - (S.unsure[a] ? 1 : 0);
+  });
+  cardbox.innerHTML = keys.map(function(k){
+    const t = TERMS[k], un = !!S.unsure[k];
+    const hide = onlyUnsure && !un;
+    return '<div class="kcard' + (un ? " unsure" : "") + '" data-k="' + k + '"' + (hide ? ' hidden' : '') + '>' +
+      '<div class="kinner">' +
+        '<div class="kface kfront"><span class="kname">' + esc(t.name) + '</span><span class="khint">点一下看解释</span></div>' +
+        '<div class="kface kback">' +
+          '<p><span class="tlab">大白话</span>' + esc(t.plain) + "</p>" +
+          '<p><span class="tlab">场景</span>' + esc(t.scene) + "</p>" +
+          '<p><span class="tlab">类比</span>' + esc(t.analogy) + "</p>" +
+        "</div>" +
+      "</div>" +
+      '<button type="button" class="kmark' + (un ? " on" : "") + '" data-mark="' + k + '">' +
+        (un ? "已标记未掌握" : "标记未掌握") + "</button>" +
+      "</div>";
+  }).join("");
+  const n = Object.keys(S.unsure).filter(k => S.unsure[k]).length;
+  $("#cbStat").textContent = "共 " + keys.length + " 张　·　标记未掌握 " + n + " 张";
+  $("#btnShowUnsure").textContent = onlyUnsure ? "看全部卡片" : "只看未掌握";
+}
+cardbox.addEventListener("click", function(e){
+  const m = e.target.closest("[data-mark]");
+  if (m){
+    const k = m.dataset.mark;
+    S.unsure[k] = !S.unsure[k];
+    save(); renderCards(); renderNav();
+    return;
+  }
+  const card = e.target.closest(".kcard");
+  if (card) card.classList.toggle("flip");
+});
+$("#btnShowUnsure").addEventListener("click", function(){ onlyUnsure = !onlyUnsure; renderCards(); });
+$("#btnFlipAll").addEventListener("click", function(){
+  cardbox.querySelectorAll(".kcard.flip").forEach(c => c.classList.remove("flip"));
+});
+
+/* ---------------- course distribution ---------------- */
+(function(){
+  const max = Math.max.apply(null, COURSE_DIST.map(c => c.q));
+  $("#dist").innerHTML = COURSE_DIST.map(function(c){
+    return '<div class="drow' + (c.done ? " done" : "") + '">' +
+      '<div class="dname"><span class="dn">课' + c.n + "</span>" + esc(c.name) + "</div>" +
+      '<div class="dbarwrap"><div class="dbar" style="width:' + (c.q / max * 100).toFixed(1) + '%"></div>' +
+        '<span class="dq">' + c.q + " 题</span></div>" +
+      '<div class="dstat">' + (c.done ? '<span class="dbadge">已做成样例</span>' : '<span class="dtodo">结构已拆</span>') + "</div>" +
+      "</div>";
+  }).join("");
+})();
+
+/* ---------------- nav scroll-spy + read progress ---------------- */
+(function(){
+  const links = Array.prototype.slice.call(document.querySelectorAll(".navlink"));
+  if (!links.length) return;
+  const targets = links.map(a => ({ link: a, el: document.querySelector(a.getAttribute("href")) }))
+                       .filter(t => t.el);
+  const bar = document.getElementById("readbar");
+  let queued = false;
+  function update(){
+    queued = false;
+    const probe = navH() + 56;
+    let current = null;
+    targets.forEach(function(t){ if (t.el.getBoundingClientRect().top <= probe) current = t; });
+    targets.forEach(function(t){ t.link.classList.toggle("active", t === current); });
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    if (bar) bar.style.width = (max > 0 ? Math.min(100, Math.max(0, window.scrollY / max * 100)) : 0).toFixed(2) + "%";
+    if (current){
+      const w = current.link.parentElement;
+      const lr = current.link.getBoundingClientRect(), wr = w.getBoundingClientRect();
+      if (lr.left < wr.left + 4 || lr.right > wr.right - 4) w.scrollTo({ left: current.link.offsetLeft - 60, behavior: "smooth" });
+    }
+  }
+  function onScroll(){ if (!queued){ queued = true; requestAnimationFrame(update); } }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+})();
+
+/* ---------------- boot ---------------- */
+(function(){
+  const firstUnanswered = QUESTIONS.findIndex(q => !S.answers[q.id]);
+  cur = firstUnanswered === -1 ? 0 : firstUnanswered;
+  const rec = S.answers[QUESTIONS[cur].id];
+  if (rec){ picked = rec.picked.slice(); phase = "result"; }
+  render();
+  renderCards();
+})();
+
+</script>
+</body>
+</html>
